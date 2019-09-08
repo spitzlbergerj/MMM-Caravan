@@ -137,20 +137,19 @@ getDom: function(){
 		}
 		else if (this.config.style == "boxes") {
 			var boxRowElement = document.createElement("td");
+			boxRowElement.style.padding = '20px';
 			
 			var tableInner = document.createElement("table");
-			tableInner.border= '1px';
-			tableInner.margin = '2px';
+			tableInner.style.border= '1px solid #ffffff';
 	
 			var row1 = document.createElement("tr");
 			row1.className = 'sensorContainer';
 			row1.align = 'center';
 			row1.vAlign = 'top';
-			row1.border_bottom = "1px";
-			row1.margin_bottom = "5px";
 			
 			var rowSensor = document.createElement("td");
 			rowSensor.className = 'sensorName';
+			rowSensor.style.borderBottom = '1px dotted #ffffff';
 			rowSensor.appendChild(document.createTextNode(this.valueList[i]["name"]));
 			
 			row1.appendChild(rowSensor);
