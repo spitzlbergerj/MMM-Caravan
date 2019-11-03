@@ -153,7 +153,7 @@ getDom: function(){
 			
 			if (this.config.style == "boxlines" ) 
 			{
-				row1.colSpan = '3';
+				rowSensor.colSpan = '3';
 			}
 			row1.appendChild(rowSensor);
 			
@@ -214,7 +214,7 @@ getDom: function(){
 				
 				if (this.config.style == "boxlines" ) 
 				{
-					row1.colSpan = '3';
+					rowDate.colSpan = '3';
 				}
 				row5.appendChild(rowDate);
 				
