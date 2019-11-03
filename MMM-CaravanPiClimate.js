@@ -81,7 +81,7 @@ getDom: function(){
 	var table = document.createElement("table");
 	table.border = 0;
 	
-	if (this.config.style == "boxes") {
+	if (this.config.style == "boxes" || this.config.style == "boxlines" ) {
 		var boxRow = document.createElement("tr");
 		boxRow.className = 'sensorBoxRow';
 		boxRow.vAlign = 'top';
@@ -93,35 +93,38 @@ getDom: function(){
 		var pressureStr = this.prepareAttribute("PRESSURE", this.valueList[i]["pressure"], this.config.pressPrecision, this.config.pressUnit);
 		var humidityStr = this.prepareAttribute("HUMIDITY", this.valueList[i]["humidity"], this.config.humPrecision, this.config.humUnit);
 
-		if (this.config.style == "lines") {
+		var rowSensor = document.createElement("td");
+		rowSensor.className = 'sensorName';
+		rowSensor.style.borderBottom = '1px dotted #ffffff';
+		rowSensor.appendChild(document.createTextNode(this.valueList[i]["name"]));
+		
+		var rowTemperature = document.createElement("td");
+		rowTemperature.className = 'sensorTemp';
+		rowTemperature.appendChild(document.createTextNode(temperatureStr));
+		
+		var rowPressure = document.createElement("td");
+		rowPressure.className = 'sensorPress';
+		rowPressure.appendChild(document.createTextNode(pressureStr));
+		
+		var rowHumidity = document.createElement("td");
+		rowHumidity.className = 'sensorHum';
+		rowHumidity.appendChild(document.createTextNode(humidityStr));
+		
+		var rowDate = document.createElement("td");
+		rowDate.className = 'sensorDate';
+		rowDate.appendChild(document.createTextNode(this.valueList[i]["datetime"]));
+
+		if (this.config.style == "lines") 
+		{
 			var row = document.createElement("tr");
 			row.className = 'sensorContainer';
 			row.vAlign = 'top';
 			
-			var rowSensor = document.createElement("td");
-			rowSensor.className = 'sensorName';
 			rowSensor.width = '120px';
-			rowSensor.appendChild(document.createTextNode(this.valueList[i]["name"]));
-			
-			var rowTemperature = document.createElement("td");
-			rowTemperature.className = 'sensorTemp';
 			rowTemperature.width = '60px';
-			rowTemperature.appendChild(document.createTextNode(temperatureStr));
-			
-			var rowPressure = document.createElement("td");
-			rowPressure.className = 'sensorPress';
 			rowPressure.width = '60px';
-			rowPressure.appendChild(document.createTextNode(pressureStr));
-			
-			var rowHumidity = document.createElement("td");
-			rowHumidity.className = 'sensorHum';
 			rowHumidity.width = '60px';
-			rowHumidity.appendChild(document.createTextNode(humidityStr));
-			
-			var rowDate = document.createElement("td");
-			rowDate.className = 'sensorDate';
 			rowDate.width = '60px';
-			rowDate.appendChild(document.createTextNode(this.valueList[i]["datetime"]));
 			
 			// Building of the table row
 			row.appendChild(rowSensor);
@@ -135,9 +138,10 @@ getDom: function(){
 			
 			table.appendChild(row);
 		}
-		else if (this.config.style == "boxes") {
+		else if (this.config.style == "boxes" || this.config.style == "boxlines" ) 
+		{
 			var boxRowElement = document.createElement("td");
-			boxRowElement.style.padding = '20px';
+			boxRowElement.className = 'sensorBoxRowElement';
 			
 			var tableInner = document.createElement("table");
 			tableInner.style.border= '1px solid #ffffff';
@@ -147,11 +151,10 @@ getDom: function(){
 			row1.align = 'center';
 			row1.vAlign = 'top';
 			
-			var rowSensor = document.createElement("td");
-			rowSensor.className = 'sensorName';
-			rowSensor.style.borderBottom = '1px dotted #ffffff';
-			rowSensor.appendChild(document.createTextNode(this.valueList[i]["name"]));
-			
+			if (this.config.style == "boxlines" ) 
+			{
+				row1.colSpan = '3';
+			}
 			row1.appendChild(rowSensor);
 			
 			var row2 = document.createElement("tr");
@@ -159,61 +162,72 @@ getDom: function(){
 			row2.align = 'center';
 			row2.vAlign = 'top';
 			
-			var rowTemperature = document.createElement("td");
-			rowTemperature.className = 'sensorTemp';
-			rowTemperature.appendChild(document.createTextNode(temperatureStr));
 			
-			row2.appendChild(rowTemperature);
+			if (this.config.style == "boxes" ) 
+			{
+				row2.appendChild(rowTemperature);
+				
+				var row3 = document.createElement("tr");
+				row3.className = 'sensorContainer';
+				row3.align = 'center';
+				row3.vAlign = 'top';
+				
+				row3.appendChild(rowPressure);
+				
+				var row4 = document.createElement("tr");
+				row4.className = 'sensorContainer';
+				row4.align = 'center';
+				row4.vAlign = 'top';
+				
+				row4.appendChild(rowHumidity);
+				
+				// Building the table 
+				tableInner.appendChild(row1);
+				tableInner.appendChild(row2);
+				tableInner.appendChild(row3);
+				tableInner.appendChild(row4);
+				
+			}
+			else
+			{
+				rowTemperature.width = '60px';
+				rowPressure.width = '60px';
+				rowHumidity.width = '60px';
+				rowDate.width = '60px';
+				
+				// Building of the table row
+				row2.appendChild(rowTemperature);
+				row2.appendChild(rowPressure);
+				row2.appendChild(rowHumidity);
+				
+				// Building the table 
+				tableInner.appendChild(row1);
+				tableInner.appendChild(row2);
+			}
 			
-			var row3 = document.createElement("tr");
-			row3.className = 'sensorContainer';
-			row3.align = 'center';
-			row3.vAlign = 'top';
-			
-			var rowPressure = document.createElement("td");
-			rowPressure.className = 'sensorPress';
-			rowPressure.appendChild(document.createTextNode(pressureStr));
-			
-			row3.appendChild(rowPressure);
-			
-			var row4 = document.createElement("tr");
-			row4.className = 'sensorContainer';
-			row4.align = 'center';
-			row4.vAlign = 'top';
-			
-			var rowHumidity = document.createElement("td");
-			rowHumidity.className = 'sensorHum';
-			rowHumidity.appendChild(document.createTextNode(humidityStr));
-			
-			row4.appendChild(rowHumidity);
-			
-			var row5 = document.createElement("tr");
-			row5.className = 'sensorContainer';
-			row5.align = 'center';
-			row5.vAlign = 'top';
-			
-			var rowDate = document.createElement("td");
-			rowDate.className = 'sensorDate';
-			rowDate.appendChild(document.createTextNode(this.valueList[i]["datetime"]));
-			
-			row5.appendChild(rowDate);
-			
-			// Building of the table rows
-			tableInner.appendChild(row1);
-			tableInner.appendChild(row2);
-			tableInner.appendChild(row3);
-			tableInner.appendChild(row4);
-			
-			if(this.config.showDate === true) {
+			if(this.config.showDate === true) 
+			{
+				var row5 = document.createElement("tr");
+				row5.className = 'sensorContainer';
+				row5.align = 'center';
+				row5.vAlign = 'top';
+				
+				if (this.config.style == "boxlines" ) 
+				{
+					row1.colSpan = '3';
+				}
+				row5.appendChild(rowDate);
+				
 				tableInner.appendChild(row5);
 			}
+			
 			boxRowElement.appendChild(tableInner)
 			boxRow.appendChild(boxRowElement);
 		}
 		i+=1;
 	}
 	
-	if (this.config.style == "boxes") {
+	if (this.config.style == "boxes" || this.config.style == "boxlines" ) {
 		table.appendChild(boxRow);
 	}
 
