@@ -11,7 +11,7 @@ In the CaravanPi project Magic Mirror is used as a display module. The screen is
 
 ## Screendumps
 
-<img src="https://github.com/spitzlbergerj/MMM-CaravanPiClimate/raw/master/images/MMM-CaravanPiClimate-Screendump-Boxlines.jpg">
+<img src="https://github.com/spitzlbergerj/MMM-CaravanPiClimate/blob/master/images/MMM-CaravanPiClimate-Screendump-Boxlines.jpg">
 
 ## Using the module
 
