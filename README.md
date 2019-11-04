@@ -1,8 +1,17 @@
-# MMM-CaravanPiClimate
+# MMM-CaravanPiClimate - a MagicMirror<sup>2</sup> Module
 
-This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
+This [MagicMirror<sup>2</sup>](https://github.com/MichMich/MagicMirror/) module is used in the [CaravanPi](https://github.com/spitzlbergerj/CaravanPi) project to display data of a BME280 climate sensor. CaravanPi is a project based on a Raspberry Pi for a smart caravan.
 
-Todo: Insert description here!
+In the CaravanPi project Magic Mirror is used as a display module. The screen is usually not mounted behind a mirror, but can also be used as a TV in the caravan. For the Caravan Pi project there are further modules for Magic Mirror:
+
+[MMM-CaravanPiPosition - Module for displaying level information](https://github.com/spitzlbergerj/MMM-CaravanPiPosition)
+[MMM-CaravanPiGasWeight - Module for indicating the filling of a gas bottle via a scale](https://github.com/spitzlbergerj/MMM-CaravanPiGasWeight)
+[MMM-CaravanPiTemperature - Module for displaying temperature values e.g. in the refrigerator](https://github.com/spitzlbergerj/MMM-CaravanPiTemperature)
+[MMM-CaravanPiClimate - Module for displaying climate values](https://github.com/spitzlbergerj/MMM-CaravanPiClimate)
+
+## Screendumps
+
+<img src="https://github.com/spitzlbergerj/MMM-CaravanPiClimate/raw/master/images/MMM-CaravanPiClimate-Screendump-Boxlines.jpg">
 
 ## Using the module
 
