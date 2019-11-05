@@ -11,6 +11,7 @@ In the CaravanPi project Magic Mirror is used as a display module. The screen is
 
 ## Screendumps
 modus: Boxlines
+
 <img src="https://raw.githubusercontent.com/spitzlbergerj/MMM-CaravanPiClimate/master/img/MMM-CaravanPiClimate-Screendump-Boxlines.jpg">
 
 ## Installation
@@ -24,7 +25,10 @@ Clone this repository:
 git clone https://github.com/spitzlbergerj/MMM-CaravanPiClimate
 ````
 
-Configure the module in your `config.js` file as followed.
+install the node dependencies:
+````
+cd MMM-CaravanPiClimate/ && npm install
+````
 
 ## Using the module
 
@@ -36,29 +40,30 @@ modules: [
 	header: 'Klimawerte',
 	position: 'top_left', // This can be any of the regions.
 	config: {
-        valueDir: "/home/pi/CaravanPi/values",
-        updateInterval: 100000, // milliseconds
-        tempUnit: " °C",
-        humUnit: " %",
-        pressUnit: " hPa",
-        tempPrecision: 2,
-        humPrecision: 2,
-        pressPrecision: 2,
-        showDate: true,
-        sensors: [
-            {
-                name: "Innenraum",
-                file: "BME280-96-118",
-            },
-            {
-                name: "Außenbereich",
-                file: "BME280-96-119",
-            },
-        ],
-        localeStr: 'de-DE',
-        style: "lines",
-    }
-}
+        	valueDir: "/home/pi/CaravanPi/values",
+        	updateInterval: 100000, // milliseconds
+        	tempUnit: " °C",
+        	humUnit: " %",
+        	pressUnit: " hPa",
+        	tempPrecision: 2,
+        	humPrecision: 2,
+        	pressPrecision: 2,
+        	showDate: true,
+        	sensors: [
+            	{
+                	name: "Innenraum",
+                	file: "BME280-96-118",
+            	},
+            	{
+                	name: "Außenbereich",
+                	file: "BME280-96-119",
+            	},
+        	],
+        	localeStr: 'de-DE',
+        	style: "lines",
+    	}
+},
+
 ]
 ````
 
@@ -76,8 +81,8 @@ The following properties can be configured:
 	<tbody>
 		<tr>
 			<td><code>valueDir</code></td>
-			<td><b>Optional</b></code> - The IP address of your HomeMatic central control unit.
-				<br/>If not set, the default is: <code>homematic-ccu2</code></td>
+			<td><b>Optional</b></code> - The directory in which the values read by the sensors are stored.
+				<br/>If not set, the default is: <code>/home/pi/CaravanPi/values</code></td>
 		</tr>
 		<tr>
 			<td><code>updateInterval</code></td>
@@ -86,15 +91,15 @@ The following properties can be configured:
 		</tr>
 		<tr>
 			<td><code>tempUnit</code></td>
-			<td><b>Optional</b></code> - determines whether the set target temperature is to be displayed in brackets. Possible values: <code>true</code> or <code>false</code> Default is <code>true</code></td>
+			<td><b>Optional</b></code> - Unit in which the temperature are indicated. Default is <code>°C</code></td>
 		</tr>
         <tr>
 			<td><code>humUnit</code></td>
-			<td><b>Optional</b></code> - determines whether the set target temperature is to be displayed in brackets. Possible values: <code>true</code> or <code>false</code> Default is <code>true</code></td>
+			<td><b>Optional</b></code> - Unit in which the humidity are indicated. Default is <code>%</code></td>
 		</tr>
         		<tr>
 			<td><code>pressUnit</code></td>
-			<td><b>Optional</b></code> - determines whether the set target temperature is to be displayed in brackets. Possible values: <code>true</code> or <code>false</code> Default is <code>true</code></td>
+			<td><b>Optional</b></code> - Unit in which the air pressure is indicated. Default is <code>hPa/code></td>
 		</tr>
         		<tr>
 			<td><code>tempPrecision</code></td>
@@ -106,15 +111,19 @@ The following properties can be configured:
 		</tr>
         		<tr>
 			<td><code>pressPrecision</code></td>
-			<td><b>Optional</b></code> - Decimal places for press values. Default is <code>2</code></td>
+			<td><b>Optional</b></code> - Decimal places for air pressure values. Default is <code>2</code></td>
 		</tr>
         		<tr>
 			<td><code>showDate</code></td>
-			<td><b>Optional</b></code> - determines whether the set target temperature is to be displayed in brackets. Possible values: <code>true</code> or <code>false</code> Default is <code>true</code></td>
+			<td><b>Optional</b></code> - Decides whether the date/time at which the values were determined is displayed. Possible values: <code>true</code> or <code>false</code> Default is <code>true</code></td>
 		</tr>
 		<tr>
 			<td><code>localeStr</code></td>
 			<td><b>Optional</b></code> - String for country-specific formatting of numbers. Possible values: see <a href="https://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a> Default is <code>'de-DE'</code></td>
+		</tr>
+		<tr>
+			<td><code>style</code></td>
+			<td><b>Optional</b></code> - Decides in which style the values are displayed. Possible values: <code>lines</code>, <code>boxes</code> or <code>boxlines</code>Default is <code>'lines'</code></td>
 		</tr>
 		<tr>
 			<td><code>sensors</code></td>
@@ -129,68 +138,12 @@ The following properties can be configured:
 					<tbody>
 						<tr>
 							<td><code>name</code></td>
-							<td>The unique <code>ise_id</code> to identify the device. All ids can be extracted by calling the following URL of the installed XML-API addon: <code>http://ccu2IP/xmlapiURL/devicelist.cgi</code></td>
+							<td>Name that is to be displayed for this sensor.</td>
 						</tr>
 						<tr>
 							<td><code>file</code></td>
-							<td>The label for the device (i.e.: Living Room). If not present or empty, the internal device name is shown instead.</td>
+							<td>File name from which the values are to be read</td>
 						</tr>
-						<tr>
-							<td><code>showSetTemperature</code></td>
-							<td>Whether to show or to hide the target temperature. Default is <code>false</code></td>
-						</tr>
-						<tr>
-							<td><code>showCurrentMode</code></td>
-							<td>Whether to show or to hide the current state (i.e.: Heater off). Default is <code>true</code></td>
-						</tr>	
-						<tr>
-							<td><code>showFaultReporting</code></td>
-							<td>Whether to show or to hide any faults of the device (i.e.: Low battery warning). Default is <code>true</code></td>
-						</tr>	
-						<tr>
-							<td><code>showHumidity</code> (only available for wall thermostats)</td>
-							<td>Whether to show or to hide the humidity. Default is <code>true</code></td>
-						</tr>	
-						<tr>
-							<td><code>precisionTemp</code></td>
-							<td>Decimal places for temperature values. Default is <code>2</code></td>
-						</tr>	
-						<tr>
-							<td><code>precisionHum</code></td>
-							<td>Decimal places for humidity values. Default is <code>0</code></td>
-						</tr>	
-						<tr>
-							<td><code>warnTempHigh</code></td>
-							<td>Determines whether a warning is displayed when the temperature threshold <code>tempThresholdHigh</code> is exceeded (or equal) by displaying the value in <code>warnColor</code>. Default is <code>'false'</code></td>
-						</tr>	
-						<tr>
-							<td><code>warnTempLow</code></td>
-							<td>Determines whether a warning is displayed when the temperature falls below or is equal the threshold <code>tempThresholdLow</code> by displaying the value in <code>warnColor</code>. Default is <code>'false'</code></td>
-						</tr>	
-						<tr>
-							<td><code>warnHumHigh</code></td>
-							<td>Determines whether a warning is displayed when the humidity threshold <code>humThresholdHigh</code> is exceeded (or equal) by displaying the value in <code>warnColor</code>. Default is <code>'false'</code></td>
-						</tr>	
-						<tr>
-							<td><code>warnHumLow</code></td>
-							<td>Determines whether a warning is displayed when the humidity falls below or is equal the threshold <code>humThresholdLow</code> by displaying the value in <code>warnColor</code>. Default is <code>'false'</code></td>
-						</tr>	
-						<tr>
-							<td><code>tempThresholdLow</code></td>
-							<td>Temperature lower threshold. Default is <code>5</code></td>
-						</tr>	
-						<tr>
-							<td><code>tempThresholdHigh</code></td>
-							<td>Temperature upper threshold. Default is <code>24</code></td>
-						</tr>	
-						<tr>
-							<td><code>humThresholdLow</code></td>
-							<td>Humidity lower threshold. Default is <code>35</code></td>
-						</tr>	
-						<tr>
-							<td><code>humThresholdHigh</code></td>
-							<td>Humidity upper threshold. Default is <code>60</code></td>
-						</tr>	
 						</tbody>
 				</table>
 			</td>
