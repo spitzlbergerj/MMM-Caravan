@@ -25,7 +25,7 @@ module.exports = NodeHelper.create({
 	
 	socketNotificationReceived: function(notification, payload) {
 		var self = this;
-		console.error('node_helper: ' + notification);
+		// console.error('node_helper: ' + notification);
 		
 		switch(notification) {
 			case "CONFIG":
@@ -55,7 +55,7 @@ module.exports = NodeHelper.create({
 			i+=1;
 		}
 
-		console.error('node_helper - getValues - valueList after', valueListNHCaravanPiClimate[0], valueListNHCaravanPiClimate[1]);
+		// console.error('node_helper - getValues - valueList after', valueListNHCaravanPiClimate[0], valueListNHCaravanPiClimate[1]);
 		self.sendSocketNotification('VALUES', valueListNHCaravanPiClimate);
 	},
 	
@@ -69,7 +69,7 @@ module.exports = NodeHelper.create({
 		var resSplit = stdout.split(' ');
 		var sensorID = resSplit[0];
 		
-		console.error('node_helper - fillValueList ', stdout, sensorID);
+		// console.error('node_helper - fillValueList ', stdout, sensorID);
 		
 		while (i<valueListNHCaravanPiClimate.length) {
 			if (sensorID === valueListNHCaravanPiClimate[i]["file"]) {
