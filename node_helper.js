@@ -47,9 +47,11 @@ module.exports = NodeHelper.create({
 		var cmd = "";
 		var i = 0;
 		
+		// console.error(this.getDateTime(),'node_helper MMM-CaravanPiClimate - getValues');
+		
 		while (i<valueList.length) {
 			cmd = cmdPart + valueList[i]["file"]
-			console.error('node_helper - cmd', cmd);
+			// console.error('node_helper - cmd', cmd);
 			exec(cmd,"",this.fillValueList);
 
 			i+=1;
@@ -82,5 +84,10 @@ module.exports = NodeHelper.create({
 		}
 		return;
 	},
-
+	
+	getDateTime: function(){
+		var currentDateTime = new Date();
+		var datetimestr = currentDateTime.toLocaleString()
+		return (datetimestr);
+	}, 
 })

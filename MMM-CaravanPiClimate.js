@@ -14,7 +14,7 @@ Module.register("MMM-CaravanPiClimate",{
 
 defaults:{
 	valueDir: "/home/pi/CaravanPi/values",
-	updateInterval: 300000, // milliseconds
+	updateInterval: 60000, // milliseconds
 	tempUnit: " °C",
 	humUnit: " %",
 	pressUnit: " hPa",
